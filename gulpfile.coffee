@@ -4,7 +4,7 @@ jade = require "gulp-jade"
 gutil = require "gulp-util"
 watch = require "gulp-watch"
 plumber = require "gulp-plumber"
-
+clean = require "gulp-clean"
 less = require "gulp-less"
 
 # JS/CS tools
@@ -25,7 +25,7 @@ config = require("configurizer").getVariables(false)
 src =
   coffee: "./assets/coffee/**/*"
   jade: "./assets/jade/index.jade"
-  less: "./assets/less/**/*"
+  less: "./assets/less/main.less"
 
 dest =
   html: "./server/"
@@ -42,7 +42,10 @@ gulp.task "server", ->
     host: "0.0.0.0"
 
 gulp.task "reload", ()->
-  locals = title: config.title
+  locals =
+    title: config.title
+    scripts: fs.readdirSync( path.join( __dirname, "server/assets/js" ) )
+    styles:  fs.readdirSync( path.join( __dirname, "server/assets/css" ) )
   gulp.src(src.jade)
   .pipe plumber()
   .pipe jade
@@ -51,30 +54,38 @@ gulp.task "reload", ()->
   .pipe gulp.dest(dest.html)
   .pipe connect.reload()
 
+gulp.task "cleanCss", ()->
+  gulp.src(dest.css)
+  .pipe clean()
 
-gulp.task "buildLess", ()->
+gulp.task "buildLess", ["cleanCss"], ()->
   gulp.src(src.less)
   .pipe plumber()
   .pipe less()
   .pipe gulp.dest(dest.css)
 
-gulp.task "buildCoffee", ()->
+
+gulp.task "cleanJs", ()->
+  gulp.src(dest.js)
+  .pipe clean()
+
+gulp.task "buildCoffee", ["cleanJs"], ()->
   gulp.src(src.coffee)
   .pipe plumber()
   .pipe coffee()
   .pipe gulp.dest(dest.js)
 
 gulp.task "watchJade", ()->
-  watch(glob: "./assets/jade/**/*", emitOnGlob: false, ["reload"])
+  watch(glob: "assets/jade/**/*", emitOnGlob: false, ["reload"])
 
 gulp.task "watchAssets", ()->
-  watch(glob: "./server/assets/**/*", emitOnGlob: false, ["reload"])
+  watch(glob: "server/assets/**/*", emitOnGlob: false, ["reload"])
 
 gulp.task "watchLess", ()->
-  watch(glob: "./assets/less/**/*", emitOnGlob: false, ["buildLess"])
+  watch(glob: "assets/less/**/*", emitOnGlob: false, ["buildLess"])
 
 gulp.task "watchCoffee", ()->
-  watch(glob: "./assets/coffee/**/*", emitOnGlob: false, ["buildCoffee"])
+  watch(glob: "assets/coffee/**/*", emitOnGlob: false, ["buildCoffee"])
 
 
 

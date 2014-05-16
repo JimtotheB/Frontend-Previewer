@@ -2,6 +2,10 @@ doctype html
 html(lang="en")
   head
     title= title
-    script(src="/assets/js/socialIcons.js")
+    each style in styles
+      link(rel="stylesheet", type="text/css", href="/assets/css/" + style)
   body
     include body
+    script(src="/bower_components/jquery/dist/jquery.min.js")
+    each script in scripts
+      script(src="/assets/js/" + script)
