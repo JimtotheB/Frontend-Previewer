@@ -20,6 +20,7 @@ connect = require "gulp-connect"
 fs = require "fs"
 path = require "path"
 # Outside config
+
 config = require("configurizer").getVariables(false)
 
 src =
@@ -38,8 +39,8 @@ gulp.task "server", ->
   connect.server
     root: ["./server"]
     livereload: true
-    port: 9000
-    host: "0.0.0.0"
+    port: config.server.port
+    host: config.server.bind
 
 gulp.task "reload", ()->
   locals =
@@ -55,7 +56,7 @@ gulp.task "reload", ()->
   .pipe connect.reload()
 
 gulp.task "cleanCss", ()->
-  gulp.src(dest.css)
+  gulp.src("#{dest.css}/*.css")
   .pipe clean()
 
 gulp.task "buildLess", ["cleanCss"], ()->
@@ -66,7 +67,7 @@ gulp.task "buildLess", ["cleanCss"], ()->
 
 
 gulp.task "cleanJs", ()->
-  gulp.src(dest.js)
+  gulp.src("#{dest.js}/*.js")
   .pipe clean()
 
 gulp.task "buildCoffee", ["cleanJs"], ()->
@@ -85,8 +86,8 @@ gulp.task "watchLess", ()->
   watch(glob: "assets/less/**/*", emitOnGlob: false, ["buildLess"])
 
 gulp.task "watchCoffee", ()->
-  watch(glob: "assets/coffee/**/*", emitOnGlob: false, ["buildCoffee"])
+  watch(glob: "assets/coffee/**", emitOnGlob: false, ["buildCoffee"])
 
 
 
-gulp.task "default", ["watchJade", "watchLess", "watchCoffee", "watchAssets", "server", "reload"]
+gulp.task "default", ["watchJade", "watchLess", "watchCoffee", "watchAssets", "server"]

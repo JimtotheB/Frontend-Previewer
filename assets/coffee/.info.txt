@@ -1,1 +1,0 @@
-CoffeeScript files here. Will be built automatically.

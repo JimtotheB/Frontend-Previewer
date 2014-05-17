@@ -1,3 +1,0 @@
-You can place Images here by hand
-
-include paths /assets/img/myimage.png

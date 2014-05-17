@@ -1,4 +1,0 @@
-You can place JS files here by hand, or write .coffeescript in the top level ./assets/coffee/ directory and they will be built
-and placed here.
-
-include paths here in ./assets/jade/index.js  /assets/js/myfile.js
