@@ -89,4 +89,4 @@ gulp.task "watchCoffee", ()->
 
 
 
-gulp.task "default", ["watchJade", "watchLess", "watchCoffee", "watchAssets", "server"]
+gulp.task "default", ["watchJade", "watchLess", "watchCoffee", "watchAssets", "server", "reload"]
