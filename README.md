@@ -18,6 +18,12 @@
 npm will install bower dependencies, node modules, and finally run gulp. The live preview server will start at 
 http://localhost:9000 or http://server.host:9000 (if you are working in a VM or somesuch).
 
+###gulp tasks
+    
+    $ gulp #default runs all of the watchers and starts the server
+    $ gulp buildLess #Builds the projects Less files 
+    $ gulp buildCoffee #builds the projects Coffeescript files
+
 ###Workflow
 
 Add files to ```./assets/<coffee|jade|css>``` and they will automatically be compiled
