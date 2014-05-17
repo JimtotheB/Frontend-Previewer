@@ -19,6 +19,7 @@ connect = require "gulp-connect"
 
 fs = require "fs"
 path = require "path"
+_ = require "lodash"
 # Outside config
 
 config = require("configurizer").getVariables(false)
@@ -45,8 +46,8 @@ gulp.task "server", ->
 gulp.task "reload", ()->
   locals =
     title: config.title
-    scripts: fs.readdirSync( path.join( __dirname, "server/assets/js" ) )
-    styles:  fs.readdirSync( path.join( __dirname, "server/assets/css" ) )
+    scripts: _.without fs.readdirSync( path.join( __dirname, "server/assets/js" ) ), ".gitignore"
+    styles:  _.without fs.readdirSync( path.join( __dirname, "server/assets/css" ) ), ".gitignore"
   gulp.src(src.jade)
   .pipe plumber()
   .pipe jade
@@ -83,11 +84,11 @@ gulp.task "watchAssets", ()->
   watch(glob: "server/assets/**/*", emitOnGlob: false, ["reload"])
 
 gulp.task "watchLess", ()->
-  watch(glob: "assets/less/**/*", emitOnGlob: false, ["buildLess"])
+  watch(glob: "assets/less/**", emitOnGlob: false, ["buildLess"])
 
 gulp.task "watchCoffee", ()->
   watch(glob: "assets/coffee/**", emitOnGlob: false, ["buildCoffee"])
 
 
 
-gulp.task "default", ["watchJade", "watchLess", "watchCoffee", "watchAssets", "server"]
+gulp.task "default", ["watchJade", "watchLess", "watchCoffee", "watchAssets", "server", "reload"]

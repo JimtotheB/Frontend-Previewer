@@ -6,6 +6,6 @@ html(lang="en")
       link(rel="stylesheet", type="text/css", href="/assets/css/" + style)
   body
     include body
-    script(src="/bower_components/jquery/dist/jquery.min.js")
+    include bower_scripts
     each script in scripts
       script(src="/assets/js/" + script)
