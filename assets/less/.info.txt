@@ -1,2 +1,1 @@
-*
-!.gitignore
+Less files here.

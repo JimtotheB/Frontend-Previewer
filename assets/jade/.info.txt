@@ -1,4 +1,1 @@
-*
-!.gitignore
-!index.jade
-!body.jade
+Jade files here.
