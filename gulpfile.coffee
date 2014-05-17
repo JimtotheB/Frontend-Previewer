@@ -84,10 +84,10 @@ gulp.task "watchAssets", ()->
   watch(glob: "server/assets/**/*", emitOnGlob: false, ["reload"])
 
 gulp.task "watchLess", ()->
-  watch(glob: "assets/less/**", emitOnGlob: false, ["buildLess"])
+  watch(glob: "assets/less/**", ["buildLess"])
 
 gulp.task "watchCoffee", ()->
-  watch(glob: "assets/coffee/**", emitOnGlob: false, ["buildCoffee"])
+  watch(glob: "assets/coffee/**", ["buildCoffee"])
 
 
 
