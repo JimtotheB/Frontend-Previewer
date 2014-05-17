@@ -61,7 +61,7 @@ gulp.task "cleanCss", ()->
   .pipe clean()
 
 gulp.task "buildLess", ["cleanCss"], ()->
-  gulp.src(src.less)
+  gulp.src([src.less, "./assets/less/debugger.less"])
   .pipe plumber()
   .pipe less()
   .pipe gulp.dest(dest.css)

@@ -1,0 +1,29 @@
+.debugContainer {
+  position: fixed;
+  width: 100%;
+  z-index: 100000;
+  bottom: 0;
+}
+
+.debugContainer .debugger {
+  width: 80%;
+  position: fixed;
+  z-index: 100000;
+  right: 0;
+  margin: 0 0 3px -40%;
+  bottom: 0;
+  height: 10%;
+  overflow: auto;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.debugger .inner {
+  padding: 3px;
+}
+
+.debugContainer .hideDebugger {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
