@@ -4,7 +4,8 @@
   "description": "Frontend-Previewer ==================",
   "main": "index.js",
   "scripts": {
-    "postinstall": "bower install; gulp"
+    "install": "bower install",
+    "postinstall": "gulp"
   },
   "repository": {
     "type": "git",
